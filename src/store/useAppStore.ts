@@ -187,6 +187,176 @@ const SAMPLE_GLOBAL_RECIPES: Recipe[] = [
     createdAt: new Date('2024-01-06'),
     updatedAt: new Date('2024-01-06'),
     isGlobal: true
+  },
+  {
+    id: 'global-7',
+    title: 'Margherita Pizza',
+    author: 'Chef Marco',
+    keywords: ['pizza', 'italian', 'vegetarian'],
+    ingredients: [
+      { name: 'pizza dough', amount: '1', measure: '' },
+      { name: 'tomato sauce', amount: '1/2', measure: 'cup' },
+      { name: 'mozzarella', amount: '200', measure: 'g' },
+      { name: 'fresh basil', amount: '1', measure: 'handful' },
+      { name: 'olive oil', amount: '1', measure: 'tbsp' }
+    ],
+    steps: [
+      'Preheat oven to 220°C',
+      'Spread tomato sauce on dough',
+      'Add mozzarella and basil',
+      'Drizzle with olive oil and bake 12–15 mins'
+    ],
+    timeMinutes: 25,
+    servings: 2,
+    loved: false,
+    rating: 4.8,
+    comments: [],
+    createdAt: new Date('2024-01-08'),
+    updatedAt: new Date('2024-01-08'),
+    isGlobal: true
+  },
+  {
+    id: 'global-8',
+    title: 'Creamy Mushroom Risotto',
+    author: 'Chef Marco',
+    keywords: ['risotto', 'italian', 'mushroom'],
+    ingredients: [
+      { name: 'arborio rice', amount: '1', measure: 'cup' },
+      { name: 'mushrooms', amount: '200', measure: 'g' },
+      { name: 'white wine', amount: '1/2', measure: 'cup' },
+      { name: 'vegetable broth', amount: '4', measure: 'cup' },
+      { name: 'parmesan', amount: '50', measure: 'g' },
+      { name: 'butter', amount: '2', measure: 'tbsp' },
+      { name: 'onion', amount: '1', measure: '' }
+    ],
+    steps: [
+      'Sauté onion and mushrooms',
+      'Add rice and wine, stir',
+      'Add broth gradually, stirring often',
+      'Stir in butter and parmesan at the end'
+    ],
+    timeMinutes: 40,
+    servings: 4,
+    loved: false,
+    rating: 4.6,
+    comments: [],
+    createdAt: new Date('2024-01-09'),
+    updatedAt: new Date('2024-01-09'),
+    isGlobal: true
+  },
+  {
+    id: 'global-9',
+    title: 'Vanilla Cupcakes',
+    author: 'Baker Sarah',
+    keywords: ['cupcake', 'vanilla', 'dessert'],
+    ingredients: [
+      { name: 'flour', amount: '1 1/2', measure: 'cup' },
+      { name: 'sugar', amount: '1', measure: 'cup' },
+      { name: 'eggs', amount: '2', measure: '' },
+      { name: 'milk', amount: '1/2', measure: 'cup' },
+      { name: 'butter', amount: '1/2', measure: 'cup' },
+      { name: 'vanilla extract', amount: '1', measure: 'tsp' },
+      { name: 'baking powder', amount: '2', measure: 'tsp' }
+    ],
+    steps: [
+      'Preheat oven to 180°C',
+      'Mix dry ingredients',
+      'Beat butter, sugar, and eggs',
+      'Add vanilla and milk',
+      'Fill cupcake liners and bake 18–20 mins'
+    ],
+    timeMinutes: 35,
+    servings: 12,
+    loved: false,
+    rating: 4.7,
+    comments: [],
+    createdAt: new Date('2024-01-10'),
+    updatedAt: new Date('2024-01-10'),
+    isGlobal: true
+  },
+  {
+    id: 'global-10',
+    title: 'Classic Cheesecake',
+    author: 'Baker Sarah',
+    keywords: ['cheesecake', 'baking', 'dessert'],
+    ingredients: [
+      { name: 'cream cheese', amount: '450', measure: 'g' },
+      { name: 'sugar', amount: '1', measure: 'cup' },
+      { name: 'eggs', amount: '3', measure: '' },
+      { name: 'sour cream', amount: '1/2', measure: 'cup' },
+      { name: 'graham crackers', amount: '200', measure: 'g' },
+      { name: 'butter', amount: '1/2', measure: 'cup' },
+      { name: 'vanilla extract', amount: '1', measure: 'tsp' }
+    ],
+    steps: [
+      'Make crust with crushed crackers and butter',
+      'Blend filling ingredients until smooth',
+      'Pour into crust and bake 45–55 mins',
+      'Cool and refrigerate at least 4 hrs'
+    ],
+    timeMinutes: 70,
+    servings: 8,
+    loved: false,
+    rating: 4.9,
+    comments: [],
+    createdAt: new Date('2024-01-11'),
+    updatedAt: new Date('2024-01-11'),
+    isGlobal: true
+  },
+  {
+    id: 'global-11',
+    title: 'Garlic Butter Shrimp',
+    author: 'Chef Alex',
+    keywords: ['shrimp', 'quick', 'easy'],
+    ingredients: [
+      { name: 'shrimp', amount: '500', measure: 'g' },
+      { name: 'butter', amount: '3', measure: 'tbsp' },
+      { name: 'garlic', amount: '4', measure: 'cloves' },
+      { name: 'lemon juice', amount: '1', measure: 'tbsp' },
+      { name: 'parsley', amount: '2', measure: 'tbsp' }
+    ],
+    steps: [
+      'Melt butter and sauté garlic',
+      'Add shrimp and cook 3–4 mins',
+      'Add lemon juice and parsley',
+      'Serve with rice or pasta'
+    ],
+    timeMinutes: 15,
+    servings: 2,
+    loved: false,
+    rating: 4.5,
+    comments: [],
+    createdAt: new Date('2024-01-12'),
+    updatedAt: new Date('2024-01-12'),
+    isGlobal: true
+  },
+  {
+    id: 'global-12',
+    title: 'Veggie Stir Fry',
+    author: 'Chef Alex',
+    keywords: ['vegetarian', 'quick', 'weeknight'],
+    ingredients: [
+      { name: 'broccoli', amount: '1', measure: 'cup' },
+      { name: 'bell pepper', amount: '1', measure: '' },
+      { name: 'carrot', amount: '1', measure: '' },
+      { name: 'soy sauce', amount: '3', measure: 'tbsp' },
+      { name: 'garlic', amount: '2', measure: 'cloves' },
+      { name: 'olive oil', amount: '2', measure: 'tbsp' }
+    ],
+    steps: [
+      'Heat oil and sauté garlic',
+      'Add vegetables and cook until tender',
+      'Add soy sauce and stir',
+      'Serve with rice or noodles'
+    ],
+    timeMinutes: 20,
+    servings: 2,
+    loved: false,
+    rating: 4.6,
+    comments: [],
+    createdAt: new Date('2024-01-13'),
+    updatedAt: new Date('2024-01-13'),
+    isGlobal: true
   }
 ];
 
@@ -198,7 +368,7 @@ const SAMPLE_GLOBAL_BOOKS: Book[] = [
     description: 'Traditional Italian recipes passed down through generations',
     categories: ['Italian', 'Traditional'],
     keywords: ['pasta', 'pizza', 'risotto'],
-    recipeIds: ['global-1'],
+    recipeIds: ['global-1', 'global-7', 'global-8'],
     loved: false,
     rating: 4.6,
     comments: [],
@@ -213,7 +383,7 @@ const SAMPLE_GLOBAL_BOOKS: Book[] = [
     description: 'Indulgent desserts and sweet treats for every occasion',
     categories: ['Desserts', 'Baking'],
     keywords: ['cookies', 'cakes', 'sweet', 'dessert'],
-    recipeIds: ['global-2'],
+    recipeIds: ['global-2', 'global-9', 'global-10'], 
     loved: false,
     rating: 4.8,
     comments: [],
@@ -228,7 +398,7 @@ const SAMPLE_GLOBAL_BOOKS: Book[] = [
     description: 'Simple, delicious meals that can be prepared in 30 minutes or less',
     categories: ['Quick', 'Easy', 'Weeknight'],
     keywords: ['fast', 'simple', 'weeknight', 'easy'],
-    recipeIds: [],
+    recipeIds: ['global-11', 'global-12'],
     loved: false,
     rating: 4.3,
     comments: [],
@@ -243,7 +413,7 @@ const SAMPLE_GLOBAL_BOOKS: Book[] = [
     description: 'A journey through bold, flavorful dishes from across the globe',
     categories: ['International', 'Spicy', 'Fusion'],
     keywords: ['indian', 'bold', 'flavorful'],
-    recipeIds: ['global-3', 'global-4'],
+    recipeIds: ['global-3', 'global-4', 'global-5'],
     loved: false,
     rating: 4.9,
     comments: [],
@@ -258,7 +428,7 @@ const SAMPLE_GLOBAL_BOOKS: Book[] = [
     description: 'A journey through bold and aromatic dishes from East and Southeast Asia',
     categories: ['Asian', 'Spicy'],
     keywords: ['thai', 'curry', 'spice'],
-    recipeIds: ['global-3'],
+    recipeIds: ['global-3', 'global-5'],
     loved: false,
     rating: 4.7,
     comments: [],
