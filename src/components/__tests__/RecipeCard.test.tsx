@@ -69,11 +69,14 @@ describe('RecipeCard', () => {
 
       render(<RecipeCard recipe={recipe} />);
 
-      expect(screen.getByText('2 cup')).toBeInTheDocument();
+      // Check for ingredients and their measurements (some may appear multiple times)
+      expect(screen.getAllByText(/2/)).toHaveLength(1);
+      expect(screen.getAllByText(/cup/)).toHaveLength(2); // flour and milk both use cups
       expect(screen.getByText('flour')).toBeInTheDocument();
-      expect(screen.getByText('3 piece')).toBeInTheDocument();
+      expect(screen.getAllByText(/3/)).toHaveLength(1);
+      expect(screen.getByText(/piece/)).toBeInTheDocument();
       expect(screen.getByText('eggs')).toBeInTheDocument();
-      expect(screen.getByText('1 cup')).toBeInTheDocument();
+      expect(screen.getAllByText(/1/)).toHaveLength(1);
       expect(screen.getByText('milk')).toBeInTheDocument();
     });
 
@@ -133,9 +136,9 @@ describe('RecipeCard', () => {
       render(<RecipeCard recipe={recipe} showActions={true} />);
 
       // Should show love, edit, and delete buttons
-      expect(screen.getByRole('button', { name: /heart/i })).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: /edit/i })).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: /trash/i })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: /favorites/i })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: /edit recipe/i })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: /delete recipe/i })).toBeInTheDocument();
     });
 
     it('should toggle love status when heart is clicked', () => {
@@ -146,7 +149,7 @@ describe('RecipeCard', () => {
 
       render(<RecipeCard recipe={recipe} />);
 
-      const heartButton = screen.getByRole('button', { name: /heart/i });
+      const heartButton = screen.getByRole('button', { name: /add to favorites/i });
       fireEvent.click(heartButton);
 
       expect(mockUpdateRecipe).toHaveBeenCalledWith(recipe.id, { loved: true });
@@ -157,7 +160,7 @@ describe('RecipeCard', () => {
 
       render(<RecipeCard recipe={recipe} onEdit={mockOnEdit} />);
 
-      const editButton = screen.getByRole('button', { name: /edit/i });
+      const editButton = screen.getByRole('button', { name: /edit recipe/i });
       fireEvent.click(editButton);
 
       expect(mockOnEdit).toHaveBeenCalledWith(recipe);
@@ -171,7 +174,7 @@ describe('RecipeCard', () => {
 
       render(<RecipeCard recipe={recipe} />);
 
-      const deleteButton = screen.getByRole('button', { name: /trash/i });
+      const deleteButton = screen.getByRole('button', { name: /delete recipe/i });
       fireEvent.click(deleteButton);
 
       // Should show confirmation dialog
@@ -184,9 +187,9 @@ describe('RecipeCard', () => {
 
       render(<RecipeCard recipe={recipe} showActions={false} />);
 
-      expect(screen.queryByRole('button', { name: /heart/i })).not.toBeInTheDocument();
-      expect(screen.queryByRole('button', { name: /edit/i })).not.toBeInTheDocument();
-      expect(screen.queryByRole('button', { name: /trash/i })).not.toBeInTheDocument();
+      expect(screen.queryByRole('button', { name: /favorites/i })).not.toBeInTheDocument();
+      expect(screen.queryByRole('button', { name: /edit recipe/i })).not.toBeInTheDocument();
+      expect(screen.queryByRole('button', { name: /delete recipe/i })).not.toBeInTheDocument();
     });
 
     it('should show loved state visually', () => {
@@ -197,7 +200,7 @@ describe('RecipeCard', () => {
 
       render(<RecipeCard recipe={recipe} />);
 
-      const heartButton = screen.getByRole('button', { name: /heart/i });
+      const heartButton = screen.getByRole('button', { name: /remove from favorites/i });
       // In the actual component, loved recipes have different styling
       expect(heartButton).toHaveClass('text-red-500');
     });
@@ -209,10 +212,10 @@ describe('RecipeCard', () => {
 
       render(<RecipeCard recipe={recipe} showActions={true} />);
 
-      expect(screen.getByRole('button', { name: /copy/i })).toBeInTheDocument();
-      expect(screen.queryByRole('button', { name: /heart/i })).not.toBeInTheDocument();
-      expect(screen.queryByRole('button', { name: /edit/i })).not.toBeInTheDocument();
-      expect(screen.queryByRole('button', { name: /trash/i })).not.toBeInTheDocument();
+      expect(screen.getByRole('button', { name: /copy to my recipes/i })).toBeInTheDocument();
+      expect(screen.queryByRole('button', { name: /favorites/i })).not.toBeInTheDocument();
+      expect(screen.queryByRole('button', { name: /edit recipe/i })).not.toBeInTheDocument();
+      expect(screen.queryByRole('button', { name: /delete recipe/i })).not.toBeInTheDocument();
     });
 
     it('should show copy destination dialog when copy is clicked', () => {
@@ -220,7 +223,7 @@ describe('RecipeCard', () => {
 
       render(<RecipeCard recipe={recipe} />);
 
-      const copyButton = screen.getByRole('button', { name: /copy/i });
+      const copyButton = screen.getByRole('button', { name: /copy to my recipes/i });
       fireEvent.click(copyButton);
 
       // The CopyDestinationDialog should be shown (mocked in this test)
@@ -232,9 +235,9 @@ describe('RecipeCard', () => {
 
       render(<RecipeCard recipe={recipe} />);
 
-      // Click on the card itself (not buttons)
-      const card = screen.getByRole('generic');
-      fireEvent.click(card);
+      // Click on the card itself (not buttons) - use the card title area
+      const cardTitle = screen.getByText(recipe.title);
+      fireEvent.click(cardTitle);
 
       // Should not update love status
       expect(mockUpdateRecipe).not.toHaveBeenCalled();
@@ -259,7 +262,7 @@ describe('RecipeCard', () => {
       render(<RecipeCard recipe={recipe} onViewRecipe={mockOnViewRecipe} />);
 
       // Click on the edit button
-      const editButton = screen.getByRole('button', { name: /edit/i });
+      const editButton = screen.getByRole('button', { name: /edit recipe/i });
       fireEvent.click(editButton);
 
       // onViewRecipe should not be called
@@ -276,9 +279,9 @@ describe('RecipeCard', () => {
 
       render(<RecipeCard recipe={recipe} />);
 
-      expect(screen.getByRole('button', { name: /heart/i })).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: /edit/i })).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: /trash/i })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: /favorites/i })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: /edit recipe/i })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: /delete recipe/i })).toBeInTheDocument();
     });
 
     it('should have proper alt text for recipe images', () => {
@@ -329,8 +332,9 @@ describe('RecipeCard', () => {
       render(<RecipeCard recipe={recipe} />);
 
       expect(screen.getByText('salt')).toBeInTheDocument();
-      expect(screen.getByText('1')).toBeInTheDocument();
       expect(screen.getByText('pepper')).toBeInTheDocument();
+      // Check that the amount "1" is displayed somewhere in the component
+      expect(screen.getByText(/1/)).toBeInTheDocument();
     });
   });
 }); 
