@@ -27,11 +27,11 @@ Each object (Recipe, Book, Course) in the user scope is a copy, so edits don’t
 
 ### ✅ Version 1
 
-- [ ] 📄 **Recipe CRUD**
+- [x] 📄 **Recipe CRUD**
   - Title, Author, Picture (optional), Keywords
   - Ingredients, Steps, Time, Amount Served
   - Love 💖, Rating ⭐, Comments 💬
-- [ ] 📚 **Book CRUD**
+- [x] 📚 **Book CRUD**
   - Group recipes into books
   - Categories and keywords
 
@@ -69,11 +69,11 @@ Each object (Recipe, Book, Course) in the user scope is a copy, so edits don’t
 
 ## 🔑 Core Functionalities
 
-- [ ] Dark / Light / Cozy / Seasonal Themes 🌞🌚
+- [x] Dark / Light / Cozy / Seasonal Themes 🌞🌚
 - [ ] Measure Converter & Ingredient Substitution 🧮🧂
-- [ ] Global Discovery + User Library Sync (Spotify-style)
-- [ ] Wizard/popover-based interactions
-- [ ] Persistent data via `localStorage`
+- [x] Global Discovery + User Library Sync (Spotify-style)
+- [x] Wizard/popover-based interactions
+- [x] Persistent data via `localStorage`
 
 ---
 
