@@ -170,7 +170,7 @@ describe('useAppStore', () => {
       // Add recipes first
       const recipe1Id = store.addRecipe(createMockRecipe({ title: 'Recipe 1' }));
       const recipe2Id = store.addRecipe(createMockRecipe({ title: 'Recipe 2' }));
-      const recipe3Id = store.addRecipe(createMockRecipe({ title: 'Recipe 3' }));
+      store.addRecipe(createMockRecipe({ title: 'Recipe 3' }));
       
       // Add book with some recipes
       const book = createMockBook({ recipeIds: [recipe1Id, recipe2Id] });

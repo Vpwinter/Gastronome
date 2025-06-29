@@ -4,10 +4,10 @@ import { Recipe, Book } from '@/types';
 import { useAppStore } from '@/store/useAppStore';
 
 // Test wrapper that provides store context
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const TestWrapper = ({ children }: { children: React.ReactNode }) => {
   // Reset store state for each test
   React.useEffect(() => {
-    const store = useAppStore.getState();
     // Reset data arrays while keeping methods
     useAppStore.setState({
       recipes: [],

@@ -19,12 +19,15 @@ vi.mock('@/store/useAppStore', () => ({
 
 // Mock Next.js Image component
 vi.mock('next/image', () => ({
-  default: ({ src, alt, ...props }: any) => <img src={src} alt={alt} {...props} />,
+  default: ({ src, alt, ...props }: { src: string; alt: string; [key: string]: unknown }) => (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img src={src} alt={alt} {...props} />
+  ),
 }));
 
 // Mock CopyDestinationDialog to prevent books.length errors
 vi.mock('../CopyDestinationDialog', () => ({
-  CopyDestinationDialog: ({ open, children }: any) => 
+  CopyDestinationDialog: ({ open, children }: { open: boolean; children?: React.ReactNode }) => 
     open ? <div data-testid="copy-destination-dialog">{children}</div> : null,
 }));
 
