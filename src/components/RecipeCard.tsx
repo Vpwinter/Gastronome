@@ -75,6 +75,7 @@ export function RecipeCard({ recipe, onEdit, onViewRecipe, showActions = true }:
                   size="icon"
                   onClick={handleCopyClick}
                   title="Copy to my recipes"
+                  aria-label="Copy to my recipes"
                 >
                   <Copy className="h-4 w-4" />
                 </Button>
@@ -85,6 +86,7 @@ export function RecipeCard({ recipe, onEdit, onViewRecipe, showActions = true }:
                     size="icon"
                     onClick={toggleLove}
                     className={recipe.loved ? 'text-red-500' : ''}
+                    aria-label={recipe.loved ? "Remove from favorites" : "Add to favorites"}
                   >
                     <Heart className={`h-4 w-4 ${recipe.loved ? 'fill-current' : ''}`} />
                   </Button>
@@ -92,6 +94,7 @@ export function RecipeCard({ recipe, onEdit, onViewRecipe, showActions = true }:
                     variant="ghost"
                     size="icon"
                     onClick={() => onEdit?.(recipe)}
+                    aria-label="Edit recipe"
                   >
                     <Edit className="h-4 w-4" />
                   </Button>
@@ -100,6 +103,7 @@ export function RecipeCard({ recipe, onEdit, onViewRecipe, showActions = true }:
                     size="icon"
                     onClick={handleDeleteClick}
                     className="text-red-500"
+                    aria-label="Delete recipe"
                   >
                     <Trash2 className="h-4 w-4" />
                   </Button>
