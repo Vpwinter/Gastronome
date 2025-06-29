@@ -375,9 +375,24 @@ export const useAppStore = create<AppState>((set, get) => ({
   },
 
   deleteBook: (id: string) => {
-    set((state: AppState) => ({
-      books: state.books.filter(book => book.id !== id)
-    }));
+    const { books } = get();
+    const bookToDelete = books.find(book => book.id === id);
+    
+    if (bookToDelete && bookToDelete.recipeIds.length > 0) {
+      // Delete the book and all its associated recipes
+      const recipeIdsToDelete = bookToDelete.recipeIds;
+      
+      set((state: AppState) => ({
+        recipes: state.recipes.filter(recipe => !recipeIdsToDelete.includes(recipe.id)),
+        books: state.books.filter(book => book.id !== id)
+      }));
+    } else {
+      // If book not found or has no recipes, just remove the book
+      set((state: AppState) => ({
+        books: state.books.filter(book => book.id !== id)
+      }));
+    }
+    
     get().saveToStorage();
   },
 
