@@ -153,7 +153,7 @@ export default function SubstitutionWizard() {
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-semibold">
-              Substitutions for "{searchTerm}" ({substitutions.length} found)
+              Substitutions for &quot;{searchTerm}&quot; ({substitutions.length} found)
             </h2>
           </div>
 
@@ -173,7 +173,7 @@ export default function SubstitutionWizard() {
                       className="cursor-pointer hover:bg-accent"
                       onClick={() => setSearchTerm(suggestion)}
                     >
-                      Try "{suggestion}"
+                      Try &quot;{suggestion}&quot;
                     </Badge>
                   ))}
                 </div>

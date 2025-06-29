@@ -59,15 +59,7 @@ export function RecipeDetailView({ recipe, onBack }: RecipeDetailViewProps) {
     ));
   };
 
-  const formatIngredient = (ingredient: typeof recipe.ingredients[0]) => {
-    if (ingredient.amount && ingredient.measure) {
-      return `${ingredient.amount} ${ingredient.measure} ${ingredient.name}`;
-    } else if (ingredient.amount) {
-      return `${ingredient.amount} ${ingredient.name}`;
-    } else {
-      return ingredient.name;
-    }
-  };
+
 
   return (
     <div className="container mx-auto p-6 space-y-6">

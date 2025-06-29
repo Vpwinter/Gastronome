@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { convertMeasurement, getIngredientDensity, MEASUREMENT_CONVERSIONS } from '@/lib/cooking-data';
+import { convertMeasurement, getIngredientDensity } from '@/lib/cooking-data';
 import { COOKING_MEASURES } from '@/types';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -9,7 +9,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { Calculator, ArrowRightLeft, Thermometer, Scale, Ruler, Droplets, Lightbulb } from 'lucide-react';
+import { ArrowRightLeft, Thermometer, Scale, Ruler, Droplets, Lightbulb } from 'lucide-react';
 
 export default function MeasurementConverter() {
   const [amount, setAmount] = useState('');
@@ -205,7 +205,7 @@ export default function MeasurementConverter() {
                 key={key}
                 variant={selectedCategory === key ? 'default' : 'outline'}
                 size="sm"
-                onClick={() => setSelectedCategory(key as any)}
+                onClick={() => setSelectedCategory(key as 'all' | 'volume' | 'weight' | 'temperature' | 'length')}
                 className="flex items-center gap-1"
               >
                 {data.icon}
