@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useAppStore } from '@/store/useAppStore';
 import { getRecipeRecommendations, getIngredientSuggestions } from '@/lib/recipe-recommender';
 import { RecipeRecommendation } from '@/types';
@@ -22,8 +22,8 @@ export default function IngredientRecommender() {
   const [preferQuick, setPreferQuick] = useState(false);
   const [preferSimple, setPreferSimple] = useState(true);
 
-  // All available recipes (user + global)
-  const allRecipes = [...recipes, ...globalRecipes];
+  // All available recipes (user + global) - memoized to prevent infinite re-renders
+  const allRecipes = useMemo(() => [...recipes, ...globalRecipes], [recipes, globalRecipes]);
 
   // Update recommendations when ingredients change
   useEffect(() => {
