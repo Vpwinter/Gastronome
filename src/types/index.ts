@@ -123,7 +123,7 @@ export interface AppState {
   
   // UI State
   theme: Theme;
-  currentView: 'recipes' | 'books' | 'courses' | 'search' | 'tools' | 'ingredient-recommender' | 'substitution-wizard' | 'measurement-converter';
+  currentView: 'recipes' | 'books' | 'courses' | 'search' | 'tools' | 'ingredient-recommender';
   
   // Actions
   addRecipe: (recipe: Omit<Recipe, 'id' | 'createdAt' | 'updatedAt'>) => string;

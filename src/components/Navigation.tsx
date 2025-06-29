@@ -8,7 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Moon, Sun, ChefHat, Book, Search, Wrench, Palette, ChevronDown, Calculator, ArrowRightLeft } from 'lucide-react';
+import { Moon, Sun, ChefHat, Book, Search, Palette, ChevronDown } from 'lucide-react';
 import { Theme, AppState } from '@/types';
 
 export function Navigation() {
@@ -30,8 +30,6 @@ export function Navigation() {
     { id: 'recipes', label: 'Recipes', icon: ChefHat },
     { id: 'books', label: 'Books', icon: Book },
     { id: 'ingredient-recommender', label: 'Ingredient Finder', icon: Search },
-    { id: 'substitution-wizard', label: 'Substitutions', icon: ArrowRightLeft },
-    { id: 'measurement-converter', label: 'Converter', icon: Calculator },
   ] as const;
 
   return (

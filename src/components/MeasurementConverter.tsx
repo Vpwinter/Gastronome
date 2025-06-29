@@ -173,13 +173,9 @@ export default function MeasurementConverter() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-6 space-y-6">
+    <div className="space-y-6">
       {/* Header */}
       <div className="text-center space-y-2">
-        <div className="flex items-center justify-center gap-2 text-2xl font-bold">
-          <Calculator className="h-6 w-6" />
-          Measurement Converter
-        </div>
         <p className="text-muted-foreground">
           Convert between different cooking measurements with precision and ease
         </p>
