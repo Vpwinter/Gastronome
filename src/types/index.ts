@@ -87,6 +87,29 @@ export interface Course {
   originalId?: string;
 }
 
+// Version 2 Types - Cooking Tools
+export interface IngredientSubstitution {
+  original: string;
+  substitute: string;
+  ratio: number; // 1.0 = 1:1 substitution
+  context?: 'baking' | 'cooking' | 'both';
+  notes?: string;
+}
+
+export interface MeasurementConversion {
+  from: CookingMeasure;
+  to: CookingMeasure;
+  ratio: number;
+  type: 'volume' | 'weight' | 'temperature' | 'length';
+}
+
+export interface RecipeRecommendation {
+  recipe: Recipe;
+  matchScore: number; // 0-1, how well it matches available ingredients
+  missingIngredients: string[];
+  availableIngredients: string[];
+}
+
 export type Theme = 'light' | 'dark' | 'cozy' | 'seasonal';
 
 export interface AppState {
@@ -100,7 +123,7 @@ export interface AppState {
   
   // UI State
   theme: Theme;
-  currentView: 'recipes' | 'books' | 'courses' | 'search' | 'tools';
+  currentView: 'recipes' | 'books' | 'courses' | 'search' | 'tools' | 'ingredient-recommender' | 'substitution-wizard' | 'measurement-converter';
   
   // Actions
   addRecipe: (recipe: Omit<Recipe, 'id' | 'createdAt' | 'updatedAt'>) => string;

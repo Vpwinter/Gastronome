@@ -63,6 +63,130 @@ const SAMPLE_GLOBAL_RECIPES: Recipe[] = [
     createdAt: new Date('2024-01-02'),
     updatedAt: new Date('2024-01-02'),
     isGlobal: true
+  },
+  {
+    id: 'global-3',
+    title: 'Spicy Chicken Tikka Masala',
+    author: 'Chef Priya',
+    keywords: ['chicken', 'spicy', 'indian'],
+    ingredients: [
+      { name: 'chicken breast', amount: '500', measure: 'g' },
+      { name: 'yogurt', amount: '1', measure: 'cup' },
+      { name: 'garam masala', amount: '2', measure: 'tsp' },
+      { name: 'tomato puree', amount: '1', measure: 'cup' },
+      { name: 'cream', amount: '1/2', measure: 'cup' },
+      { name: 'garlic', amount: '3', measure: 'cloves' },
+      { name: 'ginger', amount: '1', measure: 'tbsp' },
+      { name: 'cumin', amount: '1', measure: 'tsp' },
+      { name: 'salt', amount: 'q.s.', measure: '' },
+      { name: 'chili powder', amount: '1', measure: 'tsp' }
+    ],
+    steps: [
+      'Marinate chicken in yogurt and spices for 1 hour',
+      'Grill or sauté chicken until cooked',
+      'Prepare sauce with garlic, ginger, tomato puree, and spices',
+      'Add cream and simmer until thickened',
+      'Combine with chicken and cook 10 more minutes'
+    ],
+    timeMinutes: 60,
+    servings: 4,
+    loved: false,
+    rating: 4.7,
+    comments: [],
+    createdAt: new Date('2024-01-05'),
+    updatedAt: new Date('2024-01-05'),
+    isGlobal: true
+  },
+  {
+    id: 'global-4',
+    title: 'Avocado Toast with Poached Egg',
+    author: 'Chef Emma',
+    keywords: ['breakfast', 'healthy', 'quick'],
+    ingredients: [
+      { name: 'bread slices', amount: '2', measure: '' },
+      { name: 'avocado', amount: '1', measure: '' },
+      { name: 'eggs', amount: '2', measure: '' },
+      { name: 'lemon juice', amount: '1', measure: 'tsp' },
+      { name: 'salt', amount: 'q.s.', measure: '' },
+      { name: 'black pepper', amount: 'q.s.', measure: '' },
+      { name: 'chili flakes', amount: '1/4', measure: 'tsp' }
+    ],
+    steps: [
+      'Toast the bread slices',
+      'Mash avocado with lemon juice, salt, and pepper',
+      'Poach the eggs in simmering water',
+      'Spread avocado mash on toast',
+      'Top with poached egg and sprinkle chili flakes'
+    ],
+    timeMinutes: 15,
+    servings: 1,
+    loved: false,
+    rating: 4.4,
+    comments: [],
+    createdAt: new Date('2024-01-06'),
+    updatedAt: new Date('2024-01-06'),
+    isGlobal: true
+  },
+  {
+    id: 'global-5',
+    title: 'Thai Green Curry',
+    author: 'Chef Anong',
+    keywords: ['thai', 'spicy', 'curry'],
+    ingredients: [
+      { name: 'chicken breast', amount: '500', measure: 'g' },
+      { name: 'green curry paste', amount: '3', measure: 'tbsp' },
+      { name: 'coconut milk', amount: '400', measure: 'ml' },
+      { name: 'bamboo shoots', amount: '150', measure: 'g' },
+      { name: 'fish sauce', amount: '2', measure: 'tbsp' },
+      { name: 'sugar', amount: '1', measure: 'tsp' },
+      { name: 'basil leaves', amount: '1', measure: 'handful' },
+      { name: 'lime leaves', amount: '3', measure: '' }
+    ],
+    steps: [
+      'Fry curry paste in a pan until aromatic',
+      'Add coconut milk and bring to simmer',
+      'Add chicken and cook until done',
+      'Stir in bamboo shoots, fish sauce, sugar, and lime leaves',
+      'Simmer for 5 minutes and garnish with basil leaves'
+    ],
+    timeMinutes: 25,
+    servings: 4,
+    loved: false,
+    rating: 4.7,
+    comments: [],
+    createdAt: new Date('2024-01-05'),
+    updatedAt: new Date('2024-01-05'),
+    isGlobal: true
+  },
+  {
+    id: 'global-6',
+    title: 'Fluffy Pancakes',
+    author: 'Baker Lily',
+    keywords: ['breakfast', 'pancake', 'easy'],
+    ingredients: [
+      { name: 'flour', amount: '1 1/2', measure: 'cup' },
+      { name: 'baking powder', amount: '3 1/2', measure: 'tsp' },
+      { name: 'salt', amount: '1', measure: 'tsp' },
+      { name: 'milk', amount: '1 1/4', measure: 'cup' },
+      { name: 'egg', amount: '1', measure: '' },
+      { name: 'butter (melted)', amount: '3', measure: 'tbsp' },
+      { name: 'sugar', amount: '1', measure: 'tbsp' }
+    ],
+    steps: [
+      'Mix dry ingredients in a bowl',
+      'Whisk milk, egg, and melted butter in another bowl',
+      'Combine wet and dry ingredients to form a smooth batter',
+      'Heat a pan and pour 1/4 cup batter for each pancake',
+      'Cook until bubbles form, flip and cook until golden'
+    ],
+    timeMinutes: 20,
+    servings: 6,
+    loved: false,
+    rating: 4.9,
+    comments: [],
+    createdAt: new Date('2024-01-06'),
+    updatedAt: new Date('2024-01-06'),
+    isGlobal: true
   }
 ];
 
@@ -110,6 +234,51 @@ const SAMPLE_GLOBAL_BOOKS: Book[] = [
     comments: [],
     createdAt: new Date('2024-01-03'),
     updatedAt: new Date('2024-01-03'),
+    isGlobal: true
+  },
+  {
+    id: 'global-book-4',
+    title: 'World Flavors: From India to the West',
+    author: 'Chef Priya',
+    description: 'A journey through bold, flavorful dishes from across the globe',
+    categories: ['International', 'Spicy', 'Fusion'],
+    keywords: ['indian', 'bold', 'flavorful'],
+    recipeIds: ['global-3', 'global-4'],
+    loved: false,
+    rating: 4.9,
+    comments: [],
+    createdAt: new Date('2024-01-07'),
+    updatedAt: new Date('2024-01-07'),
+    isGlobal: true
+  },
+  {
+    id: 'global-book-5',
+    title: 'Asian Spice',
+    author: 'Chef Anong',
+    description: 'A journey through bold and aromatic dishes from East and Southeast Asia',
+    categories: ['Asian', 'Spicy'],
+    keywords: ['thai', 'curry', 'spice'],
+    recipeIds: ['global-3'],
+    loved: false,
+    rating: 4.7,
+    comments: [],
+    createdAt: new Date('2024-01-05'),
+    updatedAt: new Date('2024-01-05'),
+    isGlobal: true
+  },
+  {
+    id: 'global-book-6',
+    title: 'Brunch at Home',
+    author: 'Baker Lily',
+    description: 'Comforting brunch recipes to start your weekend right',
+    categories: ['Breakfast', 'Brunch'],
+    keywords: ['pancake', 'brunch', 'easy'],
+    recipeIds: ['global-4'],
+    loved: false,
+    rating: 4.9,
+    comments: [],
+    createdAt: new Date('2024-01-06'),
+    updatedAt: new Date('2024-01-06'),
     isGlobal: true
   }
 ];

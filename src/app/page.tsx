@@ -5,6 +5,9 @@ import { useAppStore } from '@/store/useAppStore';
 import { Navigation } from '@/components/Navigation';
 import { RecipesView } from '@/components/RecipesView';
 import { BooksView } from '@/components/BooksView';
+import IngredientRecommender from '@/components/IngredientRecommender';
+import SubstitutionWizard from '@/components/SubstitutionWizard';
+import MeasurementConverter from '@/components/MeasurementConverter';
 
 export default function Home() {
   const { currentView, loadFromStorage, theme } = useAppStore();
@@ -26,6 +29,12 @@ export default function Home() {
         return <RecipesView />;
       case 'books':
         return <BooksView />;
+      case 'ingredient-recommender':
+        return <IngredientRecommender />;
+      case 'substitution-wizard':
+        return <SubstitutionWizard />;
+      case 'measurement-converter':
+        return <MeasurementConverter />;
       case 'search':
         return (
           <div className="container mx-auto px-4 py-8">
