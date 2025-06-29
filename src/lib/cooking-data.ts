@@ -61,12 +61,14 @@ export const MEASUREMENT_CONVERSIONS: MeasurementConversion[] = [
   { from: 'dl', to: 'ml', ratio: 100, type: 'volume' },
   
   // Volume conversions - Imperial/US
-  { from: 'tsp', to: 'tbsp', ratio: 0.333, type: 'volume' },
+  { from: 'tsp', to: 'tbsp', ratio: 0.3333333, type: 'volume' },
   { from: 'tbsp', to: 'tsp', ratio: 3, type: 'volume' },
   { from: 'tbsp', to: 'fl oz', ratio: 0.5, type: 'volume' },
   { from: 'fl oz', to: 'tbsp', ratio: 2, type: 'volume' },
   { from: 'fl oz', to: 'cup', ratio: 0.125, type: 'volume' },
   { from: 'cup', to: 'fl oz', ratio: 8, type: 'volume' },
+  { from: 'cup', to: 'tbsp', ratio: 16, type: 'volume' },
+  { from: 'tbsp', to: 'cup', ratio: 0.0625, type: 'volume' },
   { from: 'cup', to: 'pint', ratio: 0.5, type: 'volume' },
   { from: 'pint', to: 'cup', ratio: 2, type: 'volume' },
   { from: 'pint', to: 'quart', ratio: 0.5, type: 'volume' },
@@ -130,34 +132,39 @@ export const MEASUREMENT_CONVERSIONS: MeasurementConversion[] = [
 
 // Common cooking ingredient density for volume-to-weight conversions
 export const INGREDIENT_DENSITIES: Record<string, number> = {
-  // Density in grams per cup
-  'flour': 120,
-  'all-purpose flour': 120,
-  'bread flour': 120,
-  'cake flour': 100,
-  'sugar': 200,
-  'white sugar': 200,
-  'brown sugar': 213,
-  'powdered sugar': 120,
-  'butter': 227,
-  'olive oil': 216,
-  'vegetable oil': 220,
-  'honey': 340,
-  'maple syrup': 322,
-  'milk': 245,
-  'water': 240,
-  'rice': 185,
-  'oats': 90,
-  'breadcrumbs': 108,
-  'cocoa powder': 75,
-  'baking powder': 192,
-  'baking soda': 220,
-  'salt': 300,
-  'vanilla extract': 208,
+  // Density in grams per ml (g/ml)
+  'flour': 0.5,
+  'all-purpose flour': 0.5,
+  'bread flour': 0.5,
+  'cake flour': 0.42,
+  'sugar': 0.83,
+  'white sugar': 0.83,
+  'brown sugar': 0.89,
+  'powdered sugar': 0.5,
+  'butter': 0.95,
+  'olive oil': 0.9,
+  'vegetable oil': 0.92,
+  'honey': 1.42,
+  'maple syrup': 1.34,
+  'milk': 1.02,
+  'water': 1.0,
+  'rice': 0.77,
+  'oats': 0.38,
+  'breadcrumbs': 0.45,
+  'cocoa powder': 0.31,
+  'baking powder': 0.8,
+  'baking soda': 0.92,
+  'salt': 1.25,
+  'vanilla extract': 0.87,
 };
 
 // Helper functions for conversions
 export function convertMeasurement(amount: number, from: string, to: string): number | null {
+  // Handle same unit conversion
+  if (from === to) {
+    return amount;
+  }
+  
   // Handle temperature conversions specially
   if (from === '°F' && to === '°C') {
     return (amount - 32) * 5 / 9;

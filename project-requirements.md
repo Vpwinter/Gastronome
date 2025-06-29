@@ -71,12 +71,10 @@ Each object (Recipe, Book, Course) in the user scope is a copy, so edits don’t
 
 ### 🟡 Version 3 (NEXT PRIORITY 🎯)
 
-- [ ] 🔍 **Search Page**
-  - Full-text search across ingredients, recipes, books, authors, and courses
-  - Global/user scope filter
+- [ ] 🔍 **Improve Search on Pages**
+  - Enable search by category, key words, author, amount of serves and time.
   - Sort by love, rating, date created
   - Advanced filtering and sorting options
-  - Link to detail pages
 
 ### 🔴 Version 4
 
@@ -108,16 +106,16 @@ Each object (Recipe, Book, Course) in the user scope is a copy, so edits don’t
 - [x] Cooking assistance tools and wizards 🧙‍♂️ (Version 2)
 - [x] Smart ingredient tooltips with substitution suggestions
 - [x] Floating tools menu for easy access while cooking
+- [x] Comprehensive testing suite with 82 tests (Unit + Integration + E2E)
 
 ---
 
 ## 🧪 Testing
 
-- [ ] Unit Tests: Components, Zustand logic
-- [ ] Integration Tests: Data flow, CRUD actions
-- [ ] E2E Tests: User flows (Playwright/Cypress)
-- [ ] CI: Ensure all tests pass before deploy
+- [x] Unit Tests: Components, Zustand logic (82 tests implemented)
+- [x] Integration Tests: Data flow, CRUD actions (Store + cooking data tested)
+- [x] E2E Tests: User flows (Playwright complete test suite)
+- [x] Test Infrastructure: Vitest + Testing Library + Playwright configured
+- [x] Test Utilities: Mock factories, custom render, localStorage mocking
+- [ ] CI: Ensure all tests pass before deploy (Next: GitHub Actions)
 
----
-
-## 🧭 Folder Structure
