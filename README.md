@@ -109,23 +109,29 @@ npm run type-check   # Run TypeScript checks
 
 ## 📸 Screenshots
 
-<!-- Add screenshots to docs/images/ folder and reference them here -->
-```markdown
-### Main Dashboard
-![Dashboard](docs/images/dashboard.png)
+### Main Recipe Dashboard
+![Recipe Dashboard](docs/images/recipes.png)
+*Browse and manage your recipe collection with advanced filtering and search capabilities*
 
-### Recipe Management
-![Recipe Form](docs/images/recipe-form.png)
+### Recipe Creation & Management
+![Add Recipe](docs/images/add-recipe.png)
+*Intuitive recipe creation form with rich ingredient management and step-by-step instructions*
 
-### Ingredient Recommender
+### Book Organization System
+![Books Management](docs/images/books.png)
+*Organize recipes into themed collections with smart categorization and easy navigation*
+
+### Intelligent Ingredient Recommender
 ![Ingredient Recommender](docs/images/ingredient-recommender.png)
+*Discover recipes based on available ingredients with fuzzy matching and preference filters*
 
-### Substitution Wizard
-![Substitution Wizard](docs/images/substitution-wizard.png)
-
-### Measurement Converter
+### Advanced Measurement Converter
 ![Measurement Converter](docs/images/measurement-converter.png)
-```
+*Professional cooking conversions with metric/imperial support and ingredient-specific calculations*
+
+### Smart Copy Operations
+![Copy Recipe](docs/images/copy-recipe.png)
+*Seamless recipe copying between books with intelligent destination selection*
 
 ## 🧪 Comprehensive Testing Suite
 
