@@ -1,13 +1,14 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { Book } from '@/types';
 import { useAppStore } from '@/store/useAppStore';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { DeleteConfirmDialog } from './DeleteConfirmDialog';
 import { CopyDestinationDialog } from './CopyDestinationDialog';
-import { Heart, Star, BookOpen, Users, Edit, Trash2, Copy } from 'lucide-react';
+import { Heart, Star, BookOpen, Edit, Trash2, Copy } from 'lucide-react';
 
 interface BookCardProps {
   book: Book;
@@ -114,11 +115,12 @@ export function BookCard({ book, onEdit, onViewBook, showActions = true }: BookC
       
       <CardContent className="space-y-4">
         {book.picture && (
-          <div className="aspect-video rounded-lg bg-gray-100 overflow-hidden">
-            <img
+          <div className="aspect-video rounded-lg bg-gray-100 overflow-hidden relative">
+            <Image
               src={book.picture}
               alt={book.title}
-              className="w-full h-full object-cover"
+              fill
+              className="object-cover"
             />
           </div>
         )}

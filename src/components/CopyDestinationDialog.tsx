@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Recipe, Book } from '@/types';
 import { useAppStore } from '@/store/useAppStore';
 import {
@@ -15,7 +15,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { Plus, Copy, Book as BookIcon, FolderPlus } from 'lucide-react';
+import { Copy, FolderPlus } from 'lucide-react';
 
 interface CopyDestinationDialogProps {
   open: boolean;
@@ -30,7 +30,7 @@ export function CopyDestinationDialog({
   item,
   itemType
 }: CopyDestinationDialogProps) {
-  const { books, addBook, updateBook, copyGlobalRecipe, copyGlobalBook, addRecipeToBook } = useAppStore();
+  const { books, addBook, copyGlobalRecipe, copyGlobalBook, addRecipeToBook } = useAppStore();
   const [selectedBookId, setSelectedBookId] = useState<string>('');
   const [newBookData, setNewBookData] = useState({
     title: '',
@@ -82,7 +82,7 @@ export function CopyDestinationDialog({
           rating: 0,
           comments: []
         };
-        const newBookId = addBook(newBook);
+        addBook(newBook);
       } else if (selectedBookId && selectedBookId !== 'new') {
         // Add to existing book
         addRecipeToBook(selectedBookId, newRecipeId);
@@ -127,7 +127,7 @@ export function CopyDestinationDialog({
             <span>Copy {itemType === 'recipe' ? 'Recipe' : 'Book'}</span>
           </DialogTitle>
           <DialogDescription>
-            Choose how you'd like to organize this {itemType === 'recipe' ? 'recipe' : 'book'} in your collection.
+            Choose how you&apos;d like to organize this {itemType === 'recipe' ? 'recipe' : 'book'} in your collection.
           </DialogDescription>
         </DialogHeader>
 

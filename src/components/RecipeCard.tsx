@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { Recipe } from '@/types';
 import { useAppStore } from '@/store/useAppStore';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -110,11 +111,12 @@ export function RecipeCard({ recipe, onEdit, onViewRecipe, showActions = true }:
       
       <CardContent className="space-y-4">
         {recipe.picture && (
-          <div className="aspect-video rounded-lg bg-gray-100 overflow-hidden">
-            <img
+          <div className="aspect-video rounded-lg bg-gray-100 overflow-hidden relative">
+            <Image
               src={recipe.picture}
               alt={recipe.title}
-              className="w-full h-full object-cover"
+              fill
+              className="object-cover"
             />
           </div>
         )}

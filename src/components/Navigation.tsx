@@ -9,7 +9,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Moon, Sun, ChefHat, Book, Search, Wrench, Palette, ChevronDown } from 'lucide-react';
-import { Theme } from '@/types';
+import { Theme, AppState } from '@/types';
 
 export function Navigation() {
   const { currentView, setCurrentView, theme, setTheme } = useAppStore();
@@ -51,7 +51,7 @@ export function Navigation() {
                     key={item.id}
                     variant={currentView === item.id ? 'default' : 'ghost'}
                     size="sm"
-                    onClick={() => setCurrentView(item.id as any)}
+                    onClick={() => setCurrentView(item.id as AppState['currentView'])}
                     className="flex items-center space-x-2"
                   >
                     <Icon className="h-4 w-4" />
