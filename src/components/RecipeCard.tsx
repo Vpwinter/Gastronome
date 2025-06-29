@@ -8,6 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { DeleteConfirmDialog } from './DeleteConfirmDialog';
 import { CopyDestinationDialog } from './CopyDestinationDialog';
+import { IngredientTooltip } from './IngredientTooltip';
 import { Heart, Star, Clock, Users, Edit, Trash2, Copy } from 'lucide-react';
 
 interface RecipeCardProps {
@@ -154,11 +155,32 @@ export function RecipeCard({ recipe, onEdit, onViewRecipe, showActions = true }:
           <ul className="text-sm space-y-1">
             {recipe.ingredients.slice(0, 3).map((ingredient, index) => (
               <li key={index} className="text-muted-foreground">
-                • {ingredient.amount && ingredient.measure 
-                    ? `${ingredient.amount} ${ingredient.measure} ${ingredient.name}`
-                    : ingredient.amount 
-                    ? `${ingredient.amount} ${ingredient.name}`
-                    : ingredient.name}
+                • {ingredient.amount && ingredient.measure ? (
+                  <>
+                    {ingredient.amount} {ingredient.measure}{' '}
+                    <IngredientTooltip 
+                      ingredientName={ingredient.name}
+                      amount={ingredient.amount}
+                      measure={ingredient.measure}
+                    >
+                      {ingredient.name}
+                    </IngredientTooltip>
+                  </>
+                ) : ingredient.amount ? (
+                  <>
+                    {ingredient.amount}{' '}
+                    <IngredientTooltip 
+                      ingredientName={ingredient.name}
+                      amount={ingredient.amount}
+                    >
+                      {ingredient.name}
+                    </IngredientTooltip>
+                  </>
+                ) : (
+                  <IngredientTooltip ingredientName={ingredient.name}>
+                    {ingredient.name}
+                  </IngredientTooltip>
+                )}
               </li>
             ))}
             {recipe.ingredients.length > 3 && (

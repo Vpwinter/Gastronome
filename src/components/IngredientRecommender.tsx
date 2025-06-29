@@ -18,7 +18,7 @@ export default function IngredientRecommender() {
   const [recommendations, setRecommendations] = useState<RecipeRecommendation[]>([]);
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [minMatchScore, setMinMatchScore] = useState(0.3);
+  const [minMatchScore, setMinMatchScore] = useState(0.1);
   const [preferQuick, setPreferQuick] = useState(false);
   const [preferSimple, setPreferSimple] = useState(true);
 
@@ -188,7 +188,9 @@ export default function IngredientRecommender() {
                   onChange={(e) => setMinMatchScore(Number(e.target.value))}
                   className="w-full mt-1 p-2 border rounded-md"
                 >
-                  <option value={0.2}>Any Match (20%)</option>
+                  <option value={0.05}>Any Match (5%)</option>
+                  <option value={0.1}>Minimal Match (10%)</option>
+                  <option value={0.2}>Decent Match (20%)</option>
                   <option value={0.3}>Fair Match (30%)</option>
                   <option value={0.5}>Good Match (50%)</option>
                   <option value={0.7}>Great Match (70%)</option>

@@ -6,6 +6,7 @@ import { Recipe } from '@/types';
 import { useAppStore } from '@/store/useAppStore';
 import { RecipeForm } from './RecipeForm';
 import { DeleteConfirmDialog } from './DeleteConfirmDialog';
+import { IngredientTooltip } from './IngredientTooltip';
 import { Button } from './ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { ArrowLeft, Clock, Users, Star, Heart, Edit, Trash2, ChefHat } from 'lucide-react';
@@ -177,7 +178,34 @@ export function RecipeDetailView({ recipe, onBack }: RecipeDetailViewProps) {
             {recipe.ingredients.map((ingredient, index) => (
               <li key={index} className="flex items-center space-x-3">
                 <div className="w-2 h-2 rounded-full bg-primary flex-shrink-0" />
-                <span className="text-sm">{formatIngredient(ingredient)}</span>
+                <span className="text-sm">
+                  {ingredient.amount && ingredient.measure ? (
+                    <>
+                      {ingredient.amount} {ingredient.measure}{' '}
+                      <IngredientTooltip 
+                        ingredientName={ingredient.name}
+                        amount={ingredient.amount}
+                        measure={ingredient.measure}
+                      >
+                        {ingredient.name}
+                      </IngredientTooltip>
+                    </>
+                  ) : ingredient.amount ? (
+                    <>
+                      {ingredient.amount}{' '}
+                      <IngredientTooltip 
+                        ingredientName={ingredient.name}
+                        amount={ingredient.amount}
+                      >
+                        {ingredient.name}
+                      </IngredientTooltip>
+                    </>
+                  ) : (
+                    <IngredientTooltip ingredientName={ingredient.name}>
+                      {ingredient.name}
+                    </IngredientTooltip>
+                  )}
+                </span>
               </li>
             ))}
           </ul>

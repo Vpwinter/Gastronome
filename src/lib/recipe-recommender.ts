@@ -8,32 +8,51 @@ function fuzzyMatch(ingredient1: string, ingredient2: string): number {
   // Exact match
   if (str1 === str2) return 1.0;
   
-  // Check if one contains the other
-  if (str1.includes(str2) || str2.includes(str1)) return 0.8;
+  // Check if one contains the other (this should catch "chicken" in "chicken breast")
+  if (str1.includes(str2) || str2.includes(str1)) return 0.9;
   
-  // Check for word overlap
-  const words1 = str1.split(/\s+/);
-  const words2 = str2.split(/\s+/);
+  // Check for word overlap with better matching
+  const words1 = str1.split(/\s+/).filter(w => w.length > 0);
+  const words2 = str2.split(/\s+/).filter(w => w.length > 0);
   
   let matchingWords = 0;
+  let totalWordsChecked = 0;
+  
   for (const word1 of words1) {
+    totalWordsChecked++;
     for (const word2 of words2) {
-      if (word1 === word2 || word1.includes(word2) || word2.includes(word1)) {
+      if (word1 === word2) {
         matchingWords++;
         break;
+      } else if (word1.length >= 3 && word2.length >= 3) {
+        // Check for partial matches on longer words
+        if (word1.includes(word2) || word2.includes(word1)) {
+          matchingWords += 0.8; // Partial credit
+          break;
+        }
       }
     }
   }
   
-  const wordMatchRatio = Math.max(matchingWords / words1.length, matchingWords / words2.length);
+  if (totalWordsChecked === 0) return 0;
   
-  // Basic Levenshtein distance for character similarity
-  const maxLen = Math.max(str1.length, str2.length);
-  const distance = levenshteinDistance(str1, str2);
-  const charSimilarity = 1 - (distance / maxLen);
+  const wordMatchRatio = matchingWords / Math.max(words1.length, words2.length);
   
-  // Combine word and character similarity
-  return Math.max(wordMatchRatio * 0.7 + charSimilarity * 0.3, 0);
+  // If we have good word matching, return high score
+  if (wordMatchRatio >= 0.8) return Math.min(0.9, wordMatchRatio);
+  if (wordMatchRatio >= 0.5) return Math.min(0.7, wordMatchRatio);
+  
+  // Fallback to character similarity for short ingredients
+  if (str1.length <= 8 && str2.length <= 8) {
+    const maxLen = Math.max(str1.length, str2.length);
+    const distance = levenshteinDistance(str1, str2);
+    const charSimilarity = 1 - (distance / maxLen);
+    
+    // Combine word and character similarity
+    return Math.max(wordMatchRatio * 0.7 + charSimilarity * 0.3, 0);
+  }
+  
+  return wordMatchRatio;
 }
 
 function levenshteinDistance(str1: string, str2: string): number {
@@ -86,7 +105,7 @@ function matchIngredients(availableIngredients: string[], recipeIngredients: str
       if (usedAvailable.has(i)) continue;
       
       const score = fuzzyMatch(recipeIngredient, availableIngredients[i]);
-      if (score > bestScore && score >= 0.6) { // Minimum threshold for match
+      if (score > bestScore && score >= 0.4) { // Lowered threshold for better matching
         bestScore = score;
         bestMatch = i;
       }
@@ -137,7 +156,7 @@ export function getRecipeRecommendations(
   } = {}
 ): RecipeRecommendation[] {
   const {
-    minMatchScore = 0.3,
+    minMatchScore = 0.1,
     maxResults = 20,
     preferFewerIngredients = true,
     preferQuickRecipes = false

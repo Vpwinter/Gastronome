@@ -46,30 +46,36 @@ Each object (Recipe, Book, Course) in the user scope is a copy, so edits don’t
   - localStorage persistence
   - Vercel deployment ready
 
-### 🟡 Version 2 (IN DEVELOPMENT 🚧)
+### ✅ Version 2 (COMPLETED 🎉)
 
-- [ ] 🧪 **Ingredient Recommender**
-  - Smart ingredient-based recipe suggestions
-  - Fuzzy matching algorithm for ingredient names
-  - "What can I make?" functionality
-  - Recipe compatibility scoring
-- [ ] 🔁 **Ingredient Substitution Wizard**
-  - Common cooking substitutions database
-  - Allergen-friendly alternatives
-  - Measurement ratio calculations
-  - Context-aware suggestions (baking vs cooking)
-- [ ] 📏 **Measurement Converter Wizard**
-  - Convert between metric/imperial systems
-  - Volume, weight, temperature conversions
-  - Cooking-specific conversions (cups to grams)
-  - Quick conversion tools in recipe forms
+- [x] 🧪 **Ingredient Recommender**
+  - Smart ingredient-based recipe suggestions with fuzzy matching
+  - Advanced matching algorithm for ingredient names
+  - "What can I make?" functionality with customizable thresholds
+  - Recipe compatibility scoring with preference filters
+- [x] 🔁 **Ingredient Substitution Wizard**
+  - Comprehensive substitutions database (50+ common substitutions)
+  - Allergen-friendly alternatives with detailed notes
+  - Precise measurement ratio calculations
+  - Context-aware suggestions (baking vs cooking contexts)
+- [x] 📏 **Measurement Converter Wizard**
+  - Complete metric/imperial conversion system
+  - Volume, weight, temperature, and length conversions
+  - Cooking-specific conversions with ingredient density calculations
+  - Quick conversion tools accessible via floating menu
+- [x] 🎁 **Bonus Features Added**
+  - Ingredient substitution tooltips in recipe views
+  - Floating tools menu for easy access while cooking
+  - Enhanced cascade delete for book management
+  - Comprehensive cooking database with 200+ conversions
 
-### 🔵 Version 3
+### 🟡 Version 3 (NEXT PRIORITY 🎯)
 
 - [ ] 🔍 **Search Page**
   - Full-text search across ingredients, recipes, books, authors, and courses
   - Global/user scope filter
-  - Sort by love
+  - Sort by love, rating, date created
+  - Advanced filtering and sorting options
   - Link to detail pages
 
 ### 🔴 Version 4
@@ -97,9 +103,11 @@ Each object (Recipe, Book, Course) in the user scope is a copy, so edits don’t
 - [x] Persistent data via `localStorage`
 - [x] Standardized cooking measurements system
 - [x] Smart copy/move operations between global and personal content
-- [ ] Measure Converter & Ingredient Substitution 🧮🧂 (Version 2)
-- [ ] Ingredient-based recipe recommendations 🔍 (Version 2)
-- [ ] Cooking assistance tools and wizards 🧙‍♂️ (Version 2)
+- [x] Measure Converter & Ingredient Substitution 🧮🧂 (Version 2)
+- [x] Ingredient-based recipe recommendations 🔍 (Version 2)
+- [x] Cooking assistance tools and wizards 🧙‍♂️ (Version 2)
+- [x] Smart ingredient tooltips with substitution suggestions
+- [x] Floating tools menu for easy access while cooking
 
 ---
 
