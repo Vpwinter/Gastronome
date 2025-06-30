@@ -9,7 +9,8 @@ import { DeleteConfirmDialog } from './DeleteConfirmDialog';
 import { IngredientTooltip } from './IngredientTooltip';
 import { Button } from './ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
-import { ArrowLeft, Clock, Users, Star, Heart, Edit, Trash2, ChefHat } from 'lucide-react';
+import { StarRating } from './ui/star-rating';
+import { ArrowLeft, Clock, Users, Heart, Edit, Trash2, ChefHat } from 'lucide-react';
 
 interface RecipeDetailViewProps {
   recipe: Recipe;
@@ -44,22 +45,22 @@ export function RecipeDetailView({ recipe, onBack }: RecipeDetailViewProps) {
     setShowEditForm(false);
   };
 
-  const renderStars = (rating: number) => {
-    return Array.from({ length: 5 }, (_, i) => (
-      <Star
-        key={i}
-        className={`h-4 w-4 ${
-          i < Math.floor(rating)
-            ? 'fill-yellow-400 text-yellow-400'
-            : i < rating
-            ? 'fill-yellow-200 text-yellow-200'
-            : 'text-gray-300'
-        }`}
-      />
-    ));
+  const handleRatingChange = (newRating: number) => {
+    if (!recipe.isGlobal) {
+      updateRecipe(recipe.id, { rating: newRating });
+    }
   };
 
-
+  if (showEditForm) {
+    return (
+      <RecipeForm
+        recipe={recipe}
+        open={showEditForm}
+        onOpenChange={handleCloseForm}
+        mode="edit"
+      />
+    );
+  }
 
   return (
     <div className="container mx-auto p-6 space-y-6">
@@ -139,10 +140,12 @@ export function RecipeDetailView({ recipe, onBack }: RecipeDetailViewProps) {
               <Users className="h-4 w-4" />
               <span>{recipe.servings} servings</span>
             </div>
-            <div className="flex items-center space-x-1">
-              {renderStars(recipe.rating)}
-              <span>({recipe.rating})</span>
-            </div>
+            <StarRating
+              rating={recipe.rating}
+              onRatingChange={recipe.isGlobal ? undefined : handleRatingChange}
+              readonly={recipe.isGlobal}
+              size="sm"
+            />
           </div>
 
           {recipe.keywords.length > 0 && (
@@ -251,21 +254,13 @@ export function RecipeDetailView({ recipe, onBack }: RecipeDetailViewProps) {
         </CardContent>
       </Card>
 
-      {/* Edit Form */}
-      <RecipeForm
-        recipe={recipe}
-        open={showEditForm}
-        onOpenChange={handleCloseForm}
-        mode="edit"
-      />
-
       {/* Delete Confirmation */}
       <DeleteConfirmDialog
         open={showDeleteDialog}
         onOpenChange={setShowDeleteDialog}
         onConfirm={handleDeleteConfirm}
         title="Delete Recipe"
-        description="This action cannot be undone. This will permanently delete the recipe from your collection."
+        description="This action cannot be undone. This will permanently delete the recipe and remove it from your collection."
         itemName={recipe.title}
       />
     </div>

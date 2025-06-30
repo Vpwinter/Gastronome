@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+  <!-- Background for better visibility -->
+  <rect width="16" height="16" rx="2" fill="#dc2626"/>
+  
+  <!-- Simplified chef hat for small size -->
+  <path d="M3 9A3 3 0 0 1 4.5 4a3.5 3.5 0 0 1 7 0A3 3 0 0 1 13 9v5H3Z" fill="white"/>
+  
+  <!-- Chef hat band -->
+  <rect x="3" y="11" width="10" height="1" fill="#dc2626"/>
+</svg> 

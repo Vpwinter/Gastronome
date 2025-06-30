@@ -8,7 +8,8 @@ import { RecipeForm } from './RecipeForm';
 import { RecipeDetailView } from './RecipeDetailView';
 import { Button } from './ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
-import { ArrowLeft, Book as BookIcon, Star, Heart } from 'lucide-react';
+import { StarRating } from './ui/star-rating';
+import { ArrowLeft, Book as BookIcon, Heart } from 'lucide-react';
 
 interface BookRecipesViewProps {
   book: Book;
@@ -16,7 +17,7 @@ interface BookRecipesViewProps {
 }
 
 export function BookRecipesView({ book, onBack }: BookRecipesViewProps) {
-  const { recipes, globalRecipes } = useAppStore();
+  const { recipes, globalRecipes, updateBook } = useAppStore();
   const [showRecipeForm, setShowRecipeForm] = useState(false);
   const [editingRecipe, setEditingRecipe] = useState<Recipe | undefined>();
   const [viewingRecipe, setViewingRecipe] = useState<Recipe | null>(null);
@@ -43,6 +44,12 @@ export function BookRecipesView({ book, onBack }: BookRecipesViewProps) {
     setEditingRecipe(undefined);
   };
 
+  const handleRatingChange = (newRating: number) => {
+    if (!book.isGlobal) {
+      updateBook(book.id, { rating: newRating });
+    }
+  };
+
   // Check if the currently viewed recipe still exists, if not, go back to book recipes list
   useEffect(() => {
     if (viewingRecipe) {
@@ -53,21 +60,6 @@ export function BookRecipesView({ book, onBack }: BookRecipesViewProps) {
       }
     }
   }, [recipes, globalRecipes, viewingRecipe]);
-
-  const renderStars = (rating: number) => {
-    return Array.from({ length: 5 }, (_, i) => (
-      <Star
-        key={i}
-        className={`h-4 w-4 ${
-          i < Math.floor(rating)
-            ? 'fill-yellow-400 text-yellow-400'
-            : i < rating
-            ? 'fill-yellow-200 text-yellow-200'
-            : 'text-gray-300'
-        }`}
-      />
-    ));
-  };
 
   // If viewing a specific recipe, show the recipe detail view
   if (viewingRecipe) {
@@ -125,10 +117,12 @@ export function BookRecipesView({ book, onBack }: BookRecipesViewProps) {
         
         <CardContent className="space-y-4">
           <div className="flex items-center space-x-4 text-sm text-muted-foreground">
-            <div className="flex items-center space-x-1">
-              {renderStars(book.rating)}
-              <span>({book.rating})</span>
-            </div>
+            <StarRating
+              rating={book.rating}
+              onRatingChange={book.isGlobal ? undefined : handleRatingChange}
+              readonly={book.isGlobal}
+              size="sm"
+            />
             <span>•</span>
             <span>{bookRecipes.length} recipes</span>
           </div>
@@ -164,15 +158,26 @@ export function BookRecipesView({ book, onBack }: BookRecipesViewProps) {
       {/* Recipes Section */}
       <div className="space-y-4">
         <div className="flex items-center justify-between">
-          <h2 className="text-xl font-semibold">Recipes in this Book</h2>
+          <h2 className="text-2xl font-bold">Recipes</h2>
+          {!book.isGlobal && (
+            <Button onClick={() => setShowRecipeForm(true)}>
+              Add Recipe
+            </Button>
+          )}
         </div>
 
         {bookRecipes.length === 0 ? (
           <Card>
-            <CardContent className="py-8 text-center text-muted-foreground">
-              <BookIcon className="h-12 w-12 mx-auto mb-4 opacity-50" />
-              <p>No recipes in this book yet.</p>
-              <p className="text-sm mt-1">Recipes from this book will appear here.</p>
+            <CardContent className="text-center py-8">
+              <p className="text-muted-foreground">No recipes in this book yet.</p>
+              {!book.isGlobal && (
+                <Button 
+                  onClick={() => setShowRecipeForm(true)}
+                  className="mt-4"
+                >
+                  Add Your First Recipe
+                </Button>
+              )}
             </CardContent>
           </Card>
         ) : (
@@ -181,9 +186,9 @@ export function BookRecipesView({ book, onBack }: BookRecipesViewProps) {
               <RecipeCard
                 key={recipe.id}
                 recipe={recipe}
-                onEdit={handleEdit}
+                onEdit={recipe.isGlobal ? undefined : handleEdit}
                 onViewRecipe={handleViewRecipe}
-                showActions={true}
+                showActions={!recipe.isGlobal}
               />
             ))}
           </div>

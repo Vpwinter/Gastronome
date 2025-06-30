@@ -6,9 +6,10 @@ import { Book } from '@/types';
 import { useAppStore } from '@/store/useAppStore';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { StarRating } from '@/components/ui/star-rating';
 import { DeleteConfirmDialog } from './DeleteConfirmDialog';
 import { CopyDestinationDialog } from './CopyDestinationDialog';
-import { Heart, Star, BookOpen, Edit, Trash2, Copy } from 'lucide-react';
+import { Heart, BookOpen, Edit, Trash2, Copy } from 'lucide-react';
 
 interface BookCardProps {
   book: Book;
@@ -38,21 +39,6 @@ export function BookCard({ book, onEdit, onViewBook, showActions = true }: BookC
 
   const handleCopyClick = () => {
     setShowCopyDialog(true);
-  };
-
-  const renderStars = (rating: number) => {
-    return Array.from({ length: 5 }, (_, i) => (
-      <Star
-        key={i}
-        className={`h-4 w-4 ${
-          i < Math.floor(rating)
-            ? 'fill-yellow-400 text-yellow-400'
-            : i < rating
-            ? 'fill-yellow-200 text-yellow-200'
-            : 'text-gray-300'
-        }`}
-      />
-    ));
   };
 
   // Get recipe count from the book's recipe IDs
@@ -134,10 +120,11 @@ export function BookCard({ book, onEdit, onViewBook, showActions = true }: BookC
             <BookOpen className="h-4 w-4" />
             <span>{bookRecipes.length} recipes</span>
           </div>
-          <div className="flex items-center space-x-1">
-            {renderStars(book.rating)}
-            <span>({book.rating})</span>
-          </div>
+          <StarRating
+            rating={book.rating}
+            readonly={true}
+            size="sm"
+          />
         </div>
 
         {book.categories.length > 0 && (

@@ -9,7 +9,8 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { ChefHat, Plus, X, Star, Clock, Users, CheckCircle2, AlertCircle } from 'lucide-react';
+import { StarRating } from '@/components/ui/star-rating';
+import { ChefHat, Plus, X, Clock, Users, CheckCircle2, AlertCircle } from 'lucide-react';
 
 export default function IngredientRecommender() {
   const { recipes, globalRecipes, setCurrentView } = useAppStore();
@@ -25,52 +26,58 @@ export default function IngredientRecommender() {
   // All available recipes (user + global) - memoized to prevent infinite re-renders
   const allRecipes = useMemo(() => [...recipes, ...globalRecipes], [recipes, globalRecipes]);
 
-  // Update recommendations when ingredients change
+  // Update recommendations when ingredients or preferences change
   useEffect(() => {
     if (availableIngredients.length > 0) {
       setIsLoading(true);
-      const newRecommendations = getRecipeRecommendations(
-        availableIngredients,
-        allRecipes,
-        {
-          minMatchScore,
-          maxResults: 15,
-          preferFewerIngredients: preferSimple,
-          preferQuickRecipes: preferQuick,
-        }
-      );
-      setRecommendations(newRecommendations);
-      setIsLoading(false);
+      try {
+        const recs = getRecipeRecommendations(
+          availableIngredients,
+          allRecipes,
+          {
+            minMatchScore,
+            maxResults: 15,
+            preferFewerIngredients: preferSimple,
+            preferQuickRecipes: preferQuick,
+          }
+        );
+        setRecommendations(recs);
+      } catch (error) {
+        console.error('Error getting recommendations:', error);
+        setRecommendations([]);
+      } finally {
+        setIsLoading(false);
+      }
     } else {
       setRecommendations([]);
     }
-  }, [availableIngredients, minMatchScore, preferQuick, preferSimple, allRecipes]);
+  }, [allRecipes, availableIngredients, minMatchScore, preferQuick, preferSimple]);
 
-  // Update ingredient suggestions
+  // Update suggestions when ingredients change
   useEffect(() => {
-    if (availableIngredients.length > 0) {
+    if (availableIngredients.length > 0 && availableIngredients.length < 10) {
       const newSuggestions = getIngredientSuggestions(availableIngredients);
-      setSuggestions(newSuggestions);
+      setSuggestions(newSuggestions.slice(0, 5)); // Limit to 5 suggestions
     } else {
       setSuggestions([]);
     }
-  }, [availableIngredients]);
+  }, [allRecipes, availableIngredients]);
 
   const addIngredient = () => {
-    const ingredient = currentIngredient.trim();
-    if (ingredient && !availableIngredients.includes(ingredient.toLowerCase())) {
-      setAvailableIngredients([...availableIngredients, ingredient.toLowerCase()]);
+    const ingredient = currentIngredient.trim().toLowerCase();
+    if (ingredient && !availableIngredients.includes(ingredient)) {
+      setAvailableIngredients(prev => [...prev, ingredient]);
       setCurrentIngredient('');
     }
   };
 
   const removeIngredient = (ingredient: string) => {
-    setAvailableIngredients(availableIngredients.filter(ing => ing !== ingredient));
+    setAvailableIngredients(prev => prev.filter(i => i !== ingredient));
   };
 
   const addSuggestedIngredient = (ingredient: string) => {
-    if (!availableIngredients.includes(ingredient.toLowerCase())) {
-      setAvailableIngredients([...availableIngredients, ingredient.toLowerCase()]);
+    if (!availableIngredients.includes(ingredient)) {
+      setAvailableIngredients(prev => [...prev, ingredient]);
     }
   };
 
@@ -81,8 +88,8 @@ export default function IngredientRecommender() {
   };
 
   const getMatchScoreColor = (score: number) => {
-    if (score >= 0.8) return 'text-green-600';
-    if (score >= 0.6) return 'text-yellow-600';
+    if (score >= 0.7) return 'text-green-600';
+    if (score >= 0.4) return 'text-yellow-600';
     return 'text-orange-600';
   };
 
@@ -115,21 +122,20 @@ export default function IngredientRecommender() {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          {/* Input field */}
           <div className="flex gap-2">
             <Input
-              placeholder="Enter an ingredient (e.g., chicken, tomatoes, onion)"
               value={currentIngredient}
               onChange={(e) => setCurrentIngredient(e.target.value)}
               onKeyPress={handleKeyPress}
+              placeholder="Enter an ingredient (e.g., chicken, tomatoes, onion)"
               className="flex-1"
             />
             <Button onClick={addIngredient} disabled={!currentIngredient.trim()}>
-              <Plus className="h-4 w-4" />
+              <Plus className="h-4 w-4 mr-2" />
+              Add
             </Button>
           </div>
 
-          {/* Current ingredients */}
           {availableIngredients.length > 0 && (
             <div>
               <p className="text-sm font-medium mb-2">Your Ingredients:</p>
@@ -138,20 +144,17 @@ export default function IngredientRecommender() {
                   <Badge
                     key={ingredient}
                     variant="secondary"
-                    className="flex items-center gap-1 capitalize"
+                    className="capitalize cursor-pointer hover:bg-destructive hover:text-destructive-foreground"
+                    onClick={() => removeIngredient(ingredient)}
                   >
                     {ingredient}
-                    <X
-                      className="h-3 w-3 cursor-pointer hover:text-destructive"
-                      onClick={() => removeIngredient(ingredient)}
-                    />
+                    <X className="h-3 w-3 ml-1" />
                   </Badge>
                 ))}
               </div>
             </div>
           )}
 
-          {/* Ingredient suggestions */}
           {suggestions.length > 0 && (
             <div>
               <p className="text-sm font-medium mb-2">Suggested Additions:</p>
@@ -288,10 +291,12 @@ export default function IngredientRecommender() {
                       {rec.recipe.servings}
                     </div>
                     {rec.recipe.rating > 0 && (
-                      <div className="flex items-center gap-1">
-                        <Star className="h-4 w-4 fill-current text-yellow-500" />
-                        {rec.recipe.rating}
-                      </div>
+                      <StarRating
+                        rating={rec.recipe.rating}
+                        readonly={true}
+                        size="sm"
+                        showValue={false}
+                      />
                     )}
                   </div>
 

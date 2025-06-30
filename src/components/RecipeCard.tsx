@@ -6,10 +6,11 @@ import { Recipe } from '@/types';
 import { useAppStore } from '@/store/useAppStore';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { StarRating } from '@/components/ui/star-rating';
 import { DeleteConfirmDialog } from './DeleteConfirmDialog';
 import { CopyDestinationDialog } from './CopyDestinationDialog';
 import { IngredientTooltip } from './IngredientTooltip';
-import { Heart, Star, Clock, Users, Edit, Trash2, Copy } from 'lucide-react';
+import { Heart, Clock, Users, Edit, Trash2, Copy } from 'lucide-react';
 
 interface RecipeCardProps {
   recipe: Recipe;
@@ -39,21 +40,6 @@ export function RecipeCard({ recipe, onEdit, onViewRecipe, showActions = true }:
 
   const handleCopyClick = () => {
     setShowCopyDialog(true);
-  };
-
-  const renderStars = (rating: number) => {
-    return Array.from({ length: 5 }, (_, i) => (
-      <Star
-        key={i}
-        className={`h-4 w-4 ${
-          i < Math.floor(rating)
-            ? 'fill-yellow-400 text-yellow-400'
-            : i < rating
-            ? 'fill-yellow-200 text-yellow-200'
-            : 'text-gray-300'
-        }`}
-      />
-    ));
   };
 
   return (
@@ -135,10 +121,11 @@ export function RecipeCard({ recipe, onEdit, onViewRecipe, showActions = true }:
             <Users className="h-4 w-4" />
             <span>{recipe.servings} servings</span>
           </div>
-          <div className="flex items-center space-x-1">
-            {renderStars(recipe.rating)}
-            <span>({recipe.rating})</span>
-          </div>
+          <StarRating
+            rating={recipe.rating}
+            readonly={true}
+            size="sm"
+          />
         </div>
 
         {recipe.keywords.length > 0 && (

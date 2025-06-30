@@ -50,7 +50,6 @@ A comprehensive, no-auth cooking application designed for culinary enthusiasts w
 
 ### 🎨 **User Experience Excellence**
 - **4 Theme System**: Light, Dark, Cozy, and Seasonal themes for personalized experience
-- **Responsive Design**: Seamless experience across desktop, tablet, and mobile devices
 - **Floating Tools Menu**: Quick access to cooking tools while following recipes
 - **Accessibility Compliance**: WCAG standards with proper ARIA labels and screen reader support
 - **Intuitive Navigation**: Clean, chef-focused UI with shadcn/ui components
@@ -124,6 +123,10 @@ npm run type-check   # Run TypeScript checks
 ### Intelligent Ingredient Recommender
 ![Ingredient Recommender](docs/images/ingredient-recommender.png)
 *Discover recipes based on available ingredients with fuzzy matching and preference filters*
+
+### Intelligent Substitution Wizard
+![Ingredient Substitution](docs/images/ingredient-substitution.png)
+*Find perfect alternatives for any ingredient with precise ratios and cooking context awareness*
 
 ### Advanced Measurement Converter
 ![Measurement Converter](docs/images/measurement-converter.png)
